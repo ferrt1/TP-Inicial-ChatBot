@@ -51,3 +51,11 @@ La biometría puede ayudar a prevenir el fraude durante el proceso de onboarding
 
 - Experiencia del usuario: 
 Además de mejorar la seguridad, la biometría también puede mejorar la experiencia del usuario al eliminar la necesidad de recordar contraseñas complicadas o realizar múltiples pasos de autenticación. Los usuarios pueden encontrar más conveniente y rápido utilizar la autenticación biométrica para acceder a sus cuentas.
+
+### Listas AML (Anti Money laundering)
+También existe la posibilidad de contrastar la identidad extraída con listados de control Anti Money Laundering o AML checks que permitan comprobar que la persona que está llevando a cabo el proceso de registro o verificación digital no esta inmersa en actividades fraudulentas como :
+  * Fraude de identidad
+  *  Blanqueo de capitales
+  *  Financiacion del terrorismo
+  * Persona bajo sanciones económicas
+  * Personas expuestas políticamente

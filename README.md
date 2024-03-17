@@ -59,3 +59,16 @@ También existe la posibilidad de contrastar la identidad extraída con listados
   *  Financiacion del terrorismo
   * Persona bajo sanciones económicas
   * Personas expuestas políticamente
+
+### Normativas Existentes
+En la argentina como normativa que debemos tener en cuenta a la hora de desarrollar un sistema de inteligencia artificial es respetar la ley de protección de datos personales (ley nacional no.25.326/2000 y decreto ejecutivo presidencial no. 1558/2001), además el gobierno nos presenta aspectos éticos que debemos  tener en cuenta con estos sistemas. Para saber más sobre estos aspectos puede visitar este enlace
+https://www.argentina.gob.ar/justicia/derechofacil/leysimple/educacion-ciencia-cultura/recomendaciones-para-el-uso-de
+
+En Europa el Reglamento  es mucho más estricto ya que fija una serie de obligaciones para la IA en función de sus riesgos potenciales , su nivel de impacto y una categorización hacia estos sistemas. a continuación se presentarán algunas de estas  normativas
+## Aplicaciones prohibidas
+prohíben ciertas aplicaciones de inteligencia artificial que atentan contra los derechos de la ciudadanía, como los sistemas de categorización biométrica basados en características sensibles y la captura indiscriminada de imágenes faciales de internet o grabaciones de cámaras de vigilancia para crear bases de datos de reconocimiento facial. 
+## Obligaciones para los sistemas de alto riesgo
+También se prevén obligaciones claras para otros sistemas de IA de alto riesgo (debido a que pueden ser muy perjudiciales para la salud, la seguridad, los derechos fundamentales, el medio ambiente, la democracia y el Estado de derecho). Algunos ejemplos de usos de alto riesgo de la IA son las infraestructuras críticas, la educación y la formación profesional, el empleo, los servicios públicos y privados esenciales (por ejemplo, la sanidad o la banca). Estos sistemas deben evaluar y reducir los riesgos, mantener registros de uso, ser transparentes y precisos y contar con supervisión humana.
+## Requisitos de transparencia 
+Los sistemas de IA de uso general y los modelos en los que se basan deben cumplir ciertos requisitos de transparencia, respetar la legislación de la UE sobre derechos de autor y publicar resúmenes detallados del contenido usado para entrenar sus modelos. 
+https://www.europarl.europa.eu/news/es/press-room/20231206IPR15699/artificial-intelligence-act-deal-on-comprehensive-rules-for-trustworthy-ai

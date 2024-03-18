@@ -1,6 +1,22 @@
-# TP-Inicial-ChatBot
+# Laboratorio de Construcción de Software - TP-Inicial-ChatBot
 
-### Onboarding
+*Por: Flavio Yvarra flavio_712@hotmail.com, Ivan Sanchez ivansncz11@gmail.com, Fernando Trejo fernandotrejo125@gmail.com*
+
+---
+
+## Introducción
+
+###  ¿Qué es la IA y cuál es su aplicación en diferentes procesos de la vida diaria, a nivel personal, profesional y empresarial?
+La Inteligencia Artificial (IA) se refiere a sistemas informáticos capaces de realizar tareas complejas que históricamente solo podían ser realizadas por seres humanos. Estas tareas incluyen el razonamiento, la toma de decisiones y la resolución de problemas, por ejemplo la comunicación en línea con los clientes o jugar al ajedrez.
+
+Su aplicación puede verse en diferentes procesos de la vida:
+- A nivel personal la IA puede servir dando asistentes virtuales como Siri o Alexa, en aplicaciones como Google Maps que utilizan IA para calcular mejores rutas, recomendaciones a nivel gustos personales de cada uno por ejemplo en Netflix.
+- A nivel profesional se puede utilizar para automatizar tareas, procesos, analizar datos.
+- A nivel empresarial es usada para el Marketing, recursos humanos o automatización industrial, por ejemplo robótica.
+
+
+### ¿Qué es el onboarding?
+
 El onboarding digital se refiere al proceso de incorporación de nuevos usuarios o clientes a una plataforma, servicio o aplicación de manera digital. Este proceso es utilizado por las empresas que ofrecen productos o servicios en línea. El objetivo del onboarding es facilitar la introducción y adopción de los usuarios a una nueva herramienta o plataforma, asegurándose de que aprendan a utilizarla de manera efectiva. Esto se puede lograr guiando a los usuarios a través de las funciones clave y ofreciendo tutoriales interactivos. Con la ayuda de chatbots e Inteligencia Artificial, se pueden acelerar muchos de estos procesos, como por ejemplo:
 - Asistencia en tiempo real para los usuarios.
 - Análisis de datos para evaluar el rendimiento del onboarding.
@@ -61,14 +77,26 @@ También existe la posibilidad de contrastar la identidad extraída con listados
   * Personas expuestas políticamente
 
 ### Normativas Existentes
+
 En la argentina como normativa que debemos tener en cuenta a la hora de desarrollar un sistema de inteligencia artificial es respetar la ley de protección de datos personales (ley nacional no.25.326/2000 y decreto ejecutivo presidencial no. 1558/2001), además el gobierno nos presenta aspectos éticos que debemos  tener en cuenta con estos sistemas. Para saber más sobre estos aspectos puede visitar este enlace
 https://www.argentina.gob.ar/justicia/derechofacil/leysimple/educacion-ciencia-cultura/recomendaciones-para-el-uso-de
 
 En Europa el Reglamento  es mucho más estricto ya que fija una serie de obligaciones para la IA en función de sus riesgos potenciales , su nivel de impacto y una categorización hacia estos sistemas. a continuación se presentarán algunas de estas  normativas
-#### Aplicaciones prohibidas
-prohíben ciertas aplicaciones de inteligencia artificial que atentan contra los derechos de la ciudadanía, como los sistemas de categorización biométrica basados en características sensibles y la captura indiscriminada de imágenes faciales de internet o grabaciones de cámaras de vigilancia para crear bases de datos de reconocimiento facial. 
-#### Obligaciones para los sistemas de alto riesgo
+
+#### Aplicaciones prohibidas:
+
+Prohíben ciertas aplicaciones de inteligencia artificial que atentan contra los derechos de la ciudadanía, como los sistemas de categorización biométrica basados en características sensibles y la captura indiscriminada de imágenes faciales de internet o grabaciones de cámaras de vigilancia para crear bases de datos de reconocimiento facial. 
+
+#### Obligaciones para los sistemas de alto riesgo:
+
 También se prevén obligaciones claras para otros sistemas de IA de alto riesgo (debido a que pueden ser muy perjudiciales para la salud, la seguridad, los derechos fundamentales, el medio ambiente, la democracia y el Estado de derecho). Algunos ejemplos de usos de alto riesgo de la IA son las infraestructuras críticas, la educación y la formación profesional, el empleo, los servicios públicos y privados esenciales (por ejemplo, la sanidad o la banca). Estos sistemas deben evaluar y reducir los riesgos, mantener registros de uso, ser transparentes y precisos y contar con supervisión humana.
+
 #### Requisitos de transparencia 
+
 Los sistemas de IA de uso general y los modelos en los que se basan deben cumplir ciertos requisitos de transparencia, respetar la legislación de la UE sobre derechos de autor y publicar resúmenes detallados del contenido usado para entrenar sus modelos. 
 https://www.europarl.europa.eu/news/es/press-room/20231206IPR15699/artificial-intelligence-act-deal-on-comprehensive-rules-for-trustworthy-ai
+
+---
+
+## Implementación
+Crearemos un chatbot para compañías telefónicas e internet utilizando la API de Telegram, el BotFather y Python. Estamos evaluando diferentes opciones para el hosting del chatbot. La combinación de estas herramientas nos permitirá tener una automatización para poder responder a consultas, brindar información sobre planes y servicios, y ayudar a los usuarios con sus necesidades de telefonía e internet. Python es un lenguaje versátil y ampliamente utilizado en el desarrollo de chatbots debido a su facilidad de uso y la gran cantidad de bibliotecas disponibles. El BotFather de Telegram nos permitirá crear y configurar nuestro bot, mientras que la API de Telegram nos proporcionará las funciones necesarias para interactuar con los usuarios. En cuanto al hosting, estamos considerando diferentes opciones según nuestras necesidades de escalabilidad, seguridad y costo. ¡Estoy emocionado por este proyecto y espero que podamos crear un chatbot útil y eficiente

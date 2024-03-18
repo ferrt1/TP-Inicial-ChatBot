@@ -1,6 +1,6 @@
 # Laboratorio de Construcción de Software - TP-Inicial-ChatBot
 
-*Por: Flavio Yvarra flavio_712@hotmail.com, Ivan Sanchez ivansncz11@gmail.com, Fernando Trejo fernandotrejo125@gmail.com*
+*Por: Flavio Ybarra flavio_712@hotmail.com, Ivan Sanchez ivansncz11@gmail.com, Fernando Trejo fernandotrejo125@gmail.com*
 
 ---
 

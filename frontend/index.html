@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chatbot</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="top-bar">
+        <div class="avatar"><p>U</p></div>
+        <div class="name">UNGSNet</div>
+      </div>
+      <div id="chatbox" class="middle">
+        <!-- Aquí se mostrarán los mensajes del chat -->
+      </div>
+      <form id="chat-form">
+        <div class="bottom-bar">
+          <div class="chat">
+            <input
+              type="text"
+              id="user-message"
+              placeholder="Escribe un mensaje..."
+            />
+            <button type="submit">
+              <i class="fas fa-paper-plane text-lg"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <script>
+      $("#chat-form").on("submit", function (e) {
+        e.preventDefault();
+        var userMessage = $("#user-message").val();
+        $.post("/bot", { user_message: userMessage }, function (botMessage) {
+          $("#chatbox").append(
+            "<div class='outgoing'><div class='bubble'><strong>Tú: </strong>" +
+              userMessage +
+              "</div></div>"
+          );
+          $("#chatbox").append(
+            "<div class='incoming'><div class='bubble'><strong>Bot: </strong>" +
+              botMessage +
+              "</div></div>"
+          );
+          $("#chatbox").scrollTop($("#chatbox")[0].scrollHeight);
+        });
+        $("#user-message").val("");
+      });
+    </script>
+  </body>
+</html>

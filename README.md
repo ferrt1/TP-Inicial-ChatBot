@@ -118,9 +118,9 @@ sin ellos el sistema no funcionaria para cumplir su cometido
 2. Requerimiento no funcional (RFN) son los requerimientos que se enfocan en
 el diseño y que sin ellos el sistema puede seguir funcionando
 
-* Interraccion atravez (RFE) 
-* Registro del cliente (RFE)
-* Iniciar sesion mediante huella digital (RFE)
+* Interraccion atravez (RFE) : debe permitir la interaccion del cliente con el chatbot atravez de preguntas o comandos.
+* Registro del cliente (RFE) : debe permitir al cliente registrarse en el sitio una vez que completa los campos de datos nombre , apellido , nro_telefono.
+* Iniciar sesion mediante huella digital (RFE) : debe permitir al cliente su logeo mediante una lectura de huella digital.
 * Disponibilidad de iniciar conversacion con el chatbot en cualquier momento (RFN)
 * El sistema debe ser fácil de usar y comprender (RFN)
 * No se deben guardar las imagenes de las huellas de datos en ninguna base de datos (RFN) 

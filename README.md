@@ -94,9 +94,36 @@ También se prevén obligaciones claras para otros sistemas de IA de alto riesgo
 #### Requisitos de transparencia 
 
 Los sistemas de IA de uso general y los modelos en los que se basan deben cumplir ciertos requisitos de transparencia, respetar la legislación de la UE sobre derechos de autor y publicar resúmenes detallados del contenido usado para entrenar sus modelos. 
+
+para mas informacion :
 https://www.europarl.europa.eu/news/es/press-room/20231206IPR15699/artificial-intelligence-act-deal-on-comprehensive-rules-for-trustworthy-ai
 
 ---
 
 ## Implementación
 Crearemos un chatbot para compañías telefónicas e internet utilizando la API de Telegram, el BotFather y Python. Estamos evaluando diferentes opciones para el hosting del chatbot. La combinación de estas herramientas nos permitirá tener una automatización para poder responder a consultas, brindar información sobre planes y servicios, y ayudar a los usuarios con sus necesidades de telefonía e internet. Python es un lenguaje versátil y ampliamente utilizado en el desarrollo de chatbots debido a su facilidad de uso y la gran cantidad de bibliotecas disponibles. El BotFather de Telegram nos permitirá crear y configurar nuestro bot, mientras que la API de Telegram nos proporcionará las funciones necesarias para interactuar con los usuarios. En cuanto al hosting, estamos considerando diferentes opciones según nuestras necesidades de escalabilidad, seguridad y costo. ¡Estoy emocionado por este proyecto y espero que podamos crear un chatbot útil y eficiente
+
+
+## Alcance
+Es el desarrollo de un  chatbot que permitira a los clientes  consultar  sobre el centro de ayuda de la empresa respodiendo a preguntas tipicas del servicio tales como las siguientes :"¿Cómo reinicio mi router?,No puedo conectarme a la red,Cómo cambio mi contraseña de wifi" , tambien se podran registrar o iniciar sesion mediante huella digital.Lo siguiente quedaria afuera del proyecto o  se podran implementar en otras etapas de desarrollo.
+cambios de servicios/planes.
+pagos de servicios.
+contratacion de servicios.
+
+## Requerimientos
+En esta sección se detallarán las condiciones o capacidades que debe poseer el sistema a desarrollar con la finalidad de realizar un software que pueda solucionar el problema de nuestro cliente asi satisfacerá sus necesidades. 
+*Interraccion atravez de chatbot
+*Registro del cliente
+*Iniciar sesion mediante huella digital
+*Disponibilidad de iniciar conversacion con el chatbot en cualquier momento
+*El sistema debe ser fácil de usar y comprender
+*No se deben guardar las imagenes de las huellas de datos en ninguna base de datos
+*El sistema debe poder tener acceso en dispositivos moviles como de escritorio
+*El tiempo de respuesta tendra que ser eficaz
+
+
+
+
+
+
+

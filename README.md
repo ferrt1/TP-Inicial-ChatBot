@@ -112,14 +112,20 @@ contratacion de servicios.
 
 ## Requerimientos
 En esta sección se detallarán las condiciones o capacidades que debe poseer el sistema a desarrollar con la finalidad de realizar un software que pueda solucionar el problema de nuestro cliente asi satisfacerá sus necesidades. 
-* Interraccion atravez de chatbot
-* Registro del cliente
-* Iniciar sesion mediante huella digital
-* Disponibilidad de iniciar conversacion con el chatbot en cualquier momento
-* El sistema debe ser fácil de usar y comprender
-* No se deben guardar las imagenes de las huellas de datos en ninguna base de datos
-* El sistema debe poder tener acceso en dispositivos moviles como de escritorio
-* El tiempo de respuesta tendra que ser eficaz
+de chatbot. La clasificación de los requerimientos se realiza en base a la importancia de cada requerimiento por eso están agrupado
+1. Requerimiento funcional esencial (RFE) son requerimientos esenciales y que
+sin ellos el sistema no funcionaria para cumplir su cometido
+2. Requerimiento no funcional (RFN) son los requerimientos que se enfocan en
+el diseño y que sin ellos el sistema puede seguir funcionando
+
+* Interraccion atravez (RFE) 
+* Registro del cliente (RFE)
+* Iniciar sesion mediante huella digital (RFE)
+* Disponibilidad de iniciar conversacion con el chatbot en cualquier momento (RFN)
+* El sistema debe ser fácil de usar y comprender (RFN)
+* No se deben guardar las imagenes de las huellas de datos en ninguna base de datos (RFN) 
+* El sistema debe poder tener acceso en dispositivos moviles como de escritorio (RFN)
+* El tiempo de respuesta tendra que ser eficaz (RFN)
 
 
 

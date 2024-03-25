@@ -112,14 +112,14 @@ contratacion de servicios.
 
 ## Requerimientos
 En esta sección se detallarán las condiciones o capacidades que debe poseer el sistema a desarrollar con la finalidad de realizar un software que pueda solucionar el problema de nuestro cliente asi satisfacerá sus necesidades. 
-*Interraccion atravez de chatbot
-*Registro del cliente
-*Iniciar sesion mediante huella digital
-*Disponibilidad de iniciar conversacion con el chatbot en cualquier momento
-*El sistema debe ser fácil de usar y comprender
-*No se deben guardar las imagenes de las huellas de datos en ninguna base de datos
-*El sistema debe poder tener acceso en dispositivos moviles como de escritorio
-*El tiempo de respuesta tendra que ser eficaz
+* Interraccion atravez de chatbot
+* Registro del cliente
+* Iniciar sesion mediante huella digital
+* Disponibilidad de iniciar conversacion con el chatbot en cualquier momento
+* El sistema debe ser fácil de usar y comprender
+* No se deben guardar las imagenes de las huellas de datos en ninguna base de datos
+* El sistema debe poder tener acceso en dispositivos moviles como de escritorio
+* El tiempo de respuesta tendra que ser eficaz
 
 
 

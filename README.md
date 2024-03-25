@@ -105,27 +105,29 @@ Crearemos un chatbot para compañías telefónicas e internet utilizando la API 
 
 
 ## Alcance
-Es el desarrollo de un  chatbot que permitira a los clientes  consultar  sobre el centro de ayuda de la empresa respodiendo a preguntas tipicas del servicio tales como las siguientes :"¿Cómo reinicio mi router?, No puedo conectarme a la red, Cómo cambio mi contraseña de wifi" , tambien se podran registrar o iniciar sesion mediante huella digital. Lo siguiente quedaria afuera del proyecto o se podran implementar en otras etapas de desarrollo.
-cambios de servicios/planes.
-pagos de servicios.
-contratacion de servicios.
+Es el desarrollo de un chatbot que permitirá a los clientes consultar sobre el centro de ayuda de la empresa respondiendo a preguntas típicas del servicio tales como las siguientes: “¿Cómo reinicio mi router?, No puedo conectarme a la red, ¿Cómo cambio mi contraseña de wifi?”, también se podrán registrar o iniciar sesión mediante huella digital. 
+Lo siguiente quedaría fuera del proyecto o se podrán implementar en otras etapas de desarrollo:
+* Cambios de servicios/planes.
+* Pagos de servicios.
+* Contratación de servicios.
 
 ## Requerimientos
-En esta sección se detallarán las condiciones o capacidades que debe poseer el sistema a desarrollar con la finalidad de realizar un software que pueda solucionar el problema de nuestro cliente asi satisfacerá sus necesidades. 
-de chatbot. La clasificación de los requerimientos se realiza en base a la importancia de cada requerimiento por eso están agrupado
-1. Requerimiento funcional esencial (RFE) son requerimientos esenciales y que
-sin ellos el sistema no funcionaria para cumplir su cometido
-2. Requerimiento no funcional (RFN) son los requerimientos que se enfocan en
-el diseño y que sin ellos el sistema puede seguir funcionando
+En esta sección se detallarán las condiciones o capacidades que debe poseer el sistema a desarrollar con la finalidad de realizar un software que pueda solucionar el problema de nuestro cliente así satisfacerá sus necesidades de chatbot. La clasificación de los requerimientos se realiza en base a la importancia de cada requerimiento por eso están agrupados en:
 
-* Interraccion atravez (RFE) : debe permitir la interaccion del cliente con el chatbot atravez de preguntas o comandos.
-* Registro del cliente (RFE) : debe permitir al cliente registrarse en el sitio una vez que completa los campos de datos nombre , apellido , nro_telefono.
-* Iniciar sesion mediante huella digital (RFE) : debe permitir al cliente su logeo mediante una lectura de huella digital.
-* Disponibilidad de iniciar conversacion con el chatbot en cualquier momento (RFN)
-* El sistema debe ser fácil de usar y comprender (RFN)
-* No se deben guardar las imagenes de las huellas de datos en ninguna base de datos (RFN) 
-* El sistema debe poder tener acceso en dispositivos moviles como de escritorio (RFN)
-* El tiempo de respuesta tendra que ser eficaz (RFN)
+1. Requerimiento funcional esencial (RFE): Lo utilizaremos para explicar que son requerimientos esenciales y que sin ellos el sistema no funcionaría para cumplir su cometido.
+* Visualización del chatbot (RFE): El cliente debe poder visualizar el chatbot en la interfaz de la aplicación.
+* Campo de entrada para texto (RFE): Debe haber un campo de entrada donde el cliente pueda escribir texto para interactuar con el chatbot. Este texto será enviado al chatbot al presionar un botón de “enviar” o al presionar la tecla “Enter”.
+* Interacción a través (RFE): Se debe permitir la interacción del cliente con el chatbot a través de preguntas.
+* Registro del cliente (RFE): Debe permitir al cliente registrarse en el sitio una vez que completa los campos de datos nombre, apellido, nro_telefono.
+* Iniciar sesión mediante huella digital (RFE): El cliente podrá iniciar sesión mediante una lectura de huella digital.
+  
+2. Requerimiento no funcional (RFN): Lo utilizaremos para explicar que son los requerimientos que se enfocan en el diseño y que sin ellos el sistema puede seguir funcionando
+* Disponibilidad de iniciar conversación con el chatbot en cualquier momento (RFN): El chatbot debe estar disponible 24/7 para que los clientes puedan iniciar una conversación en cualquier momento.
+* El sistema debe ser fácil de usar y comprender (RFN): La interfaz de usuario debe ser intuitiva y amigable, permitiendo a los usuarios navegar y utilizar el chatbot sin dificultades.
+* No se deben guardar las imágenes de las huellas de datos en ninguna base de datos (RFN): Por razones de seguridad y privacidad, las imágenes de las huellas digitales utilizadas para la autenticación no deben ser almacenadas en ninguna base de datos.
+* El sistema debe poder tener acceso en dispositivos móviles como de escritorio (RFN): El chatbot debe ser responsivo y compatible con diferentes tamaños de pantalla y sistemas operativos para garantizar una experiencia de usuario óptima en cualquier dispositivo.
+* El tiempo de respuesta tendrá que ser eficaz (RFN): El chatbot debe ser capaz de procesar las consultas de los usuarios y proporcionar respuestas en un tiempo razonable.
+
 
 
 

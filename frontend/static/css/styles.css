@@ -49,16 +49,11 @@ body {
   border-radius: 10px 10px 0 0;
 }
 
-
-
 .avatar {
   width: 35px;
   height: 35px;
-  background: linear-gradient(
-    to bottom left,
-    var(--primary) 20%,
-    var(--secondary) 100%
-  );
+  background-image: url('../images/logo.png');
+  background-size: cover;
   border-radius: 50%;
   position: absolute;
   top: 11px;
@@ -68,6 +63,7 @@ body {
     margin: 7px 12px;
   }
 }
+
 
 .chatbox {
     position: absolute; 

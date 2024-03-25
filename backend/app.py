@@ -11,6 +11,9 @@ def home():
 def send_css(path):
     return send_from_directory('../frontend/static/css', path)
 
+@app.route('/images/<path:path>')
+def send_image(path):
+    return send_from_directory('../frontend/static/images', path)
 
 @app.route("/bot", methods=["POST"])
 def bot_response():

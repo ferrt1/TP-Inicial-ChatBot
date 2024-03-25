@@ -1,5 +1,5 @@
 questions,answers
-"Hola","¡Hola! Soy un bot de UNGSNet, en que te puedo ayudar? Puedes preguntame por problemas tecnicos sobre router, red, wifi. Sobre tu facturacion o ponerte en contacto con un asistente atravez de otras consultas."
+"Hola","¡Hola! Soy un bot de UNGSNet, ¿En qué te puedo ayudar? Puedes preguntame por problemas tecnicos sobre router, red, wifi. Sobre tu facturacion o ponerte en contacto con un asistente atravez de otras consultas."
 "Facturacion Factura Resumen", "Envianos tu mail (@gmail o @hotmail) y te mandaremos la factura alli"
 "@gmail @hotmail", "Te hemos enviado la factura a tu mail"
 "¿Cómo reinicio mi router?","Para reiniciar tu router, busca el botón de reinicio en el dispositivo. Puede ser necesario utilizar un objeto puntiagudo para presionarlo. Mantén presionado el botón durante unos 10 segundos y luego suéltalo. El router debería reiniciarse automáticamente."
@@ -7,4 +7,4 @@ questions,answers
 "¿Cómo cambio mi contraseña de wifi?","Para cambiar tu contraseña de Wi-Fi, necesitarás acceder a la configuración de tu router. La dirección IP para acceder a la configuración del router suele estar impresa en el router mismo. Una vez que hayas accedido a la configuración del router, busca la sección de seguridad o de Wi-Fi para cambiar la contraseña."
 "Otras consultas Otra consulta", "Envianos tu numero telefonico (Ej: 1130285563) y uno de nuestros operadores se comunicara a la brevedad"
 "1130285563", "En breve uno de nuestros representantes se pondra en contacto contigo"
-"Gracias Chau", "Nos alegra ayudarte Muchas gracias por usar el bot de UNGSNet"
+"Gracias Chau", "Nos alegra ayudarte. Muchas gracias por usar el bot de UNGSNet"

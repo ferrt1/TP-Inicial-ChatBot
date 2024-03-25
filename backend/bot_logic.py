@@ -18,4 +18,6 @@ def get_bot_response(user_message):
     closest_index = np.argmax(similarities)
     bot_message = answers[closest_index]
 
+    bot_message = bot_message.replace('"', '')
+
     return bot_message

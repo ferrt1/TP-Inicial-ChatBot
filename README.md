@@ -105,7 +105,7 @@ Crearemos un chatbot para compañías telefónicas e internet utilizando la API 
 
 
 ## Alcance
-Es el desarrollo de un  chatbot que permitira a los clientes  consultar  sobre el centro de ayuda de la empresa respodiendo a preguntas tipicas del servicio tales como las siguientes :"¿Cómo reinicio mi router?,No puedo conectarme a la red,Cómo cambio mi contraseña de wifi" , tambien se podran registrar o iniciar sesion mediante huella digital.Lo siguiente quedaria afuera del proyecto o  se podran implementar en otras etapas de desarrollo.
+Es el desarrollo de un  chatbot que permitira a los clientes  consultar  sobre el centro de ayuda de la empresa respodiendo a preguntas tipicas del servicio tales como las siguientes :"¿Cómo reinicio mi router?, No puedo conectarme a la red, Cómo cambio mi contraseña de wifi" , tambien se podran registrar o iniciar sesion mediante huella digital. Lo siguiente quedaria afuera del proyecto o se podran implementar en otras etapas de desarrollo.
 cambios de servicios/planes.
 pagos de servicios.
 contratacion de servicios.

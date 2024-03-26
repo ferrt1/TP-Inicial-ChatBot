@@ -111,7 +111,10 @@ Lo siguiente quedaría fuera del proyecto o se podrán implementar en otras etap
 * Pagos de servicios.
 * Contratación de servicios.
 
-## Requerimientos
+## Documentación funcional:
+
+### Requerimientos
+
 En esta sección se detallarán las condiciones o capacidades que debe poseer el sistema a desarrollar con la finalidad de realizar un software que pueda solucionar el problema de nuestro cliente. La clasificación de los requerimientos se realiza en base a la importancia de cada requerimiento por eso están agrupados en:
 
 1. Requerimiento funcional esencial (RFE): Lo utilizaremos para explicar que son requerimientos esenciales y que sin ellos el sistema no funcionaría para cumplir su cometido.
@@ -128,14 +131,21 @@ En esta sección se detallarán las condiciones o capacidades que debe poseer el
 * El sistema debe poder tener acceso en dispositivos móviles como de escritorio (RFN): El chatbot debe ser responsivo y compatible con diferentes tamaños de pantalla y sistemas operativos para garantizar una experiencia de usuario óptima en cualquier dispositivo.
 * El tiempo de respuesta tendrá que ser eficaz (RFN): El chatbot debe ser capaz de procesar las consultas de los usuarios y proporcionar respuestas en un tiempo razonable.
 
+## Documentación técnica
 
-## Chatbot
-Para que el chatbot responda las consultas de los clientes, primero hay que entrenarlo y para hacer eso lo que se hizo fue adjuntar las posibles preguntas que hiciera el usuario con su correspondiente respuesta todo esto en un documento csv ("comma-separated values"), Luego le inyectamos ese documento en un vectorizador, aca estariamos haciendo como que aprenda vocabulario en la cual en la matriz que se va a formar estarian las palabras con mas frecuencia y la lineas del documento que agregamos.
+### Tecnologías Utilizadas
+
+* Python: Lenguaje de programación utilizado para el backend.
+* Flask: Framework de Python utilizado para crear la aplicación web.
+* scikit-learn: Biblioteca de Machine Learning utilizada para entrenar el modelo del chatbot.
+* HTML/CSS/JS: Lenguajes utilizados para la interfaz de usuario del chatbot.
+
+
+### Estructura del código
+
+#### bot_logic.py 
+
 ``` python
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
-import numpy as np
-import pandas as pd
 
 # lee los datos de entrenamiento desde un archivo .csv
 data = pd.read_csv('data.csv')
@@ -144,10 +154,9 @@ data = pd.read_csv('data.csv')
 questions, answers = data['questions'], data['answers']
 vectorizer = TfidfVectorizer().fit(questions)
 
-
 ```
-### Procesamiento del mensaje recibido
-Para la interpretacion de los mensajes recibidos por el chatbot lo que hace es transformar el mensaje en un vector (tal y como se explica antes) , luego se empiezan empieza a calcular la similitudes entre la matriz del mensaje del usuario con la matriz de las preguntas que almacenamos este calculo indicara al chatbot que es lo que tiene que responder.
+
+Para que el chatbot responda las consultas de los clientes, primero hay que entrenarlo. Para hacer eso lo que se hizo fue adjuntar las posibles preguntas que hiciera el usuario con su correspondiente respuesta todo esto en un documento csv ("comma-separated values"). Luego le inyectamos ese documento en un vectorizador, aca estariamos haciendo como que aprenda vocabulario en la cual en la matriz que se va a formar estarian las palabras con mas frecuencia y la lineas del documento que agregamos.
 
 
 ``` python
@@ -163,12 +172,17 @@ def get_bot_response(user_message):
 
     return bot_message
 
-
-
 ```
 
+Para la interpretacion de los mensajes recibidos por el chatbot lo que hace es transformar el mensaje en un vector (tal y como se explica antes) , luego se empiezan empieza a calcular la similitudes entre la matriz del mensaje del usuario con la matriz de las preguntas que almacenamos este calculo indicara al chatbot que es lo que tiene que responder.
 
+#### app.py 
 
+Este código define la aplicación web y las rutas para servir archivos estáticos y la ruta /bot para las solicitudes POST del chatbot.
+
+#### HTML y Javascript
+
+Este código define la interfaz de usuario del chatbot y la lógica para enviar las preguntas del usuario al servidor y mostrar las respuestas del bot.
 
 
 

@@ -112,7 +112,7 @@ Lo siguiente quedaría fuera del proyecto o se podrán implementar en otras etap
 * Contratación de servicios.
 
 ## Requerimientos
-En esta sección se detallarán las condiciones o capacidades que debe poseer el sistema a desarrollar con la finalidad de realizar un software que pueda solucionar el problema de nuestro cliente así satisfacerá sus necesidades de chatbot. La clasificación de los requerimientos se realiza en base a la importancia de cada requerimiento por eso están agrupados en:
+En esta sección se detallarán las condiciones o capacidades que debe poseer el sistema a desarrollar con la finalidad de realizar un software que pueda solucionar el problema de nuestro cliente. La clasificación de los requerimientos se realiza en base a la importancia de cada requerimiento por eso están agrupados en:
 
 1. Requerimiento funcional esencial (RFE): Lo utilizaremos para explicar que son requerimientos esenciales y que sin ellos el sistema no funcionaría para cumplir su cometido.
 * Visualización del chatbot (RFE): El cliente debe poder visualizar el chatbot en la interfaz de la aplicación.

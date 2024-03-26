@@ -129,7 +129,6 @@ En esta sección se detallarán las condiciones o capacidades que debe poseer el
 
 * Disponibilidad de iniciar conversación con el chatbot en cualquier momento (RFN): El chatbot debe estar disponible 24/7 para que los clientes puedan iniciar una conversación en cualquier momento.
 * El sistema debe ser fácil de usar y comprender (RFN): La interfaz de usuario debe ser intuitiva y amigable, permitiendo a los usuarios navegar y utilizar el chatbot sin dificultades.
-* No se deben guardar las imágenes de las huellas de datos en ninguna base de datos (RFN): Por razones de seguridad y privacidad, las imágenes de las huellas digitales utilizadas para la autenticación no deben ser almacenadas en ninguna base de datos.
 * El sistema debe poder tener acceso en dispositivos móviles como de escritorio (RFN): El chatbot debe ser responsivo y compatible con diferentes tamaños de pantalla y sistemas operativos para garantizar una experiencia de usuario óptima en cualquier dispositivo.
 * El tiempo de respuesta tendrá que ser eficaz (RFN): El chatbot debe ser capaz de procesar las consultas de los usuarios y proporcionar respuestas en un tiempo razonable.
 

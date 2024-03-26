@@ -129,9 +129,20 @@ En esta sección se detallarán las condiciones o capacidades que debe poseer el
 * El tiempo de respuesta tendrá que ser eficaz (RFN): El chatbot debe ser capaz de procesar las consultas de los usuarios y proporcionar respuestas en un tiempo razonable.
 
 
+## Chatbot
+Para que el chatbot responda las consultas de los clientes, primero hay que entrenarlo y para hacer eso lo que se hizo fue adjuntar las posibles preguntas que hiciera el usuario con su correspondiente respuesta todo esto en un documento csv ("comma-separated values"), Luego le inyectamos ese documento en un vectorizador, aca estariamos haciendo como que aprenda vocabulario en la cual en la matriz que se va a formar estarian las palabras con mas frecuencia y la linea del documento que agregamos.
+``` python
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+import numpy as np
+import pandas as pd
+
+# lee los datos de entrenamiento desde un archivo .csv
+data = pd.read_csv('data.csv')
+
+# prepara los datos 
+questions, answers = data['questions'], data['answers']
+vectorizer = TfidfVectorizer().fit(questions)
 
 
-
-
-
-
+``` 

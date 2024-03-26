@@ -118,13 +118,15 @@ Lo siguiente quedaría fuera del proyecto o se podrán implementar en otras etap
 En esta sección se detallarán las condiciones o capacidades que debe poseer el sistema a desarrollar con la finalidad de realizar un software que pueda solucionar el problema de nuestro cliente. La clasificación de los requerimientos se realiza en base a la importancia de cada requerimiento por eso están agrupados en:
 
 1. Requerimiento funcional esencial (RFE): Lo utilizaremos para explicar que son requerimientos esenciales y que sin ellos el sistema no funcionaría para cumplir su cometido.
+ 
 * Visualización del chatbot (RFE): El cliente debe poder visualizar el chatbot en la interfaz de la aplicación.
 * Campo de entrada para texto (RFE): Debe haber un campo de entrada donde el cliente pueda escribir texto para interactuar con el chatbot. Este texto será enviado al chatbot al presionar un botón de “enviar” o al presionar la tecla “Enter”.
-* Interacción a través (RFE): Se debe permitir la interacción del cliente con el chatbot a través de preguntas.
+* Interacción con el chatbot (RFE): Se debe permitir la interacción del cliente con el chatbot a través de preguntas.
 * Registro del cliente (RFE): Debe permitir al cliente registrarse en el sitio una vez que completa los campos de datos nombre, apellido, nro_telefono.
 * Iniciar sesión mediante huella digital (RFE): El cliente podrá iniciar sesión mediante una lectura de huella digital.
   
 2. Requerimiento no funcional (RFN): Lo utilizaremos para explicar que son los requerimientos que se enfocan en el diseño y que sin ellos el sistema puede seguir funcionando
+
 * Disponibilidad de iniciar conversación con el chatbot en cualquier momento (RFN): El chatbot debe estar disponible 24/7 para que los clientes puedan iniciar una conversación en cualquier momento.
 * El sistema debe ser fácil de usar y comprender (RFN): La interfaz de usuario debe ser intuitiva y amigable, permitiendo a los usuarios navegar y utilizar el chatbot sin dificultades.
 * No se deben guardar las imágenes de las huellas de datos en ninguna base de datos (RFN): Por razones de seguridad y privacidad, las imágenes de las huellas digitales utilizadas para la autenticación no deben ser almacenadas en ninguna base de datos.

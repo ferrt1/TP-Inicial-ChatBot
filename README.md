@@ -101,7 +101,7 @@ https://www.europarl.europa.eu/news/es/press-room/20231206IPR15699/artificial-in
 ---
 
 ## Implementación
-Crearemos un chatbot para compañías telefónicas e internet utilizando la API de Telegram, el BotFather y Python. Estamos evaluando diferentes opciones para el hosting del chatbot. La combinación de estas herramientas nos permitirá tener una automatización para poder responder a consultas, brindar información sobre planes y servicios, y ayudar a los usuarios con sus necesidades de telefonía e internet. Python es un lenguaje versátil y ampliamente utilizado en el desarrollo de chatbots debido a su facilidad de uso y la gran cantidad de bibliotecas disponibles. El BotFather de Telegram nos permitirá crear y configurar nuestro bot, mientras que la API de Telegram nos proporcionará las funciones necesarias para interactuar con los usuarios. En cuanto al hosting, estamos considerando diferentes opciones según nuestras necesidades de escalabilidad, seguridad y costo. ¡Estoy emocionado por este proyecto y espero que podamos crear un chatbot útil y eficiente
+Crearemos un chatbot para compañías telefónicas e internet utilizando la API de Telegram, el BotFather y Python. Estamos evaluando diferentes opciones para el hosting del chatbot. La combinación de estas herramientas nos permitirá tener una automatización para poder responder a consultas, brindar información sobre planes y servicios, y ayudar a los usuarios con sus necesidades de telefonía e internet. Python es un lenguaje versátil y ampliamente utilizado en el desarrollo de chatbots debido a su facilidad de uso y la gran cantidad de bibliotecas disponibles. El BotFather de Telegram nos permitirá crear y configurar nuestro bot, mientras que la API de Telegram nos proporcionará las funciones necesarias para interactuar con los usuarios. En cuanto al hosting, estamos considerando diferentes opciones según nuestras necesidades de escalabilidad, seguridad y costo. 
 
 
 ## Alcance
@@ -130,7 +130,7 @@ En esta sección se detallarán las condiciones o capacidades que debe poseer el
 
 
 ## Chatbot
-Para que el chatbot responda las consultas de los clientes, primero hay que entrenarlo y para hacer eso lo que se hizo fue adjuntar las posibles preguntas que hiciera el usuario con su correspondiente respuesta todo esto en un documento csv ("comma-separated values"), Luego le inyectamos ese documento en un vectorizador, aca estariamos haciendo como que aprenda vocabulario en la cual en la matriz que se va a formar estarian las palabras con mas frecuencia y la linea del documento que agregamos.
+Para que el chatbot responda las consultas de los clientes, primero hay que entrenarlo y para hacer eso lo que se hizo fue adjuntar las posibles preguntas que hiciera el usuario con su correspondiente respuesta todo esto en un documento csv ("comma-separated values"), Luego le inyectamos ese documento en un vectorizador, aca estariamos haciendo como que aprenda vocabulario en la cual en la matriz que se va a formar estarian las palabras con mas frecuencia y la lineas del documento que agregamos.
 ``` python
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
@@ -145,4 +145,32 @@ questions, answers = data['questions'], data['answers']
 vectorizer = TfidfVectorizer().fit(questions)
 
 
-``` 
+```
+### Procesamiento del mensaje recibido
+Para la interpretacion de los mensajes recibidos por el chatbot lo que hace es transformar el mensaje en un vector (tal y como se explica antes) , luego se empiezan empieza a calcular la similitudes entre la matriz del mensaje del usuario con la matriz de las preguntas que almacenamos este calculo indicara al chatbot que es lo que tiene que responder.
+
+
+``` python
+def get_bot_response(user_message):
+    user_vector = vectorizer.transform([user_message])
+
+    similarities = cosine_similarity(user_vector, vectorizer.transform(questions))
+
+    closest_index = np.argmax(similarities)
+    bot_message = answers[closest_index]
+
+    bot_message = bot_message.replace('"', '')
+
+    return bot_message
+
+
+
+```
+
+
+
+
+
+
+
+

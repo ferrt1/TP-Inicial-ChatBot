@@ -15,6 +15,10 @@ def send_css(path):
 def send_image(path):
     return send_from_directory('../frontend/static/images', path)
 
+@app.route('/js/<path:path>')
+def send_javascript(path):
+    return send_from_directory('../frontend/static/js', path)
+
 @app.route("/bot", methods=["POST"])
 def bot_response():
     user_message = request.form["user_message"]

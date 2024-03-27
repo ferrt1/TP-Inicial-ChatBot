@@ -6,7 +6,7 @@ questions;answers
 "No puedo conectarme a la red";"Aquí hay algunas cosas que puedes probar: 1. Asegúrate de que tu dispositivo esté dentro del rango de la red. 2. Comprueba si otros dispositivos pueden conectarse a la red. 3. Reinicia tu dispositivo y tu router. 4. Si el problema persiste, escribe asistente y te contactaremos con un representante"
 "cambiar contraseña de wifi?";"Para cambiar tu contraseña de Wi-Fi, necesitarás acceder a la configuración de tu router. La dirección IP para acceder a la configuración del router suele estar impresa en el router mismo. Una vez que hayas accedido a la configuración del router, busca la sección de seguridad o de Wi-Fi para cambiar la contraseña."
 "Otras consultas Otra consulta"; "Escribe asistente y te contactaremos con uno de nuestros representantes a la brevedad"
-"funciona mal el wifi";"Necesitamos que reinicies tu router y en 10 segundos vuelvas a contactarte para ver si mejoro, si el problema persiste es necesario contactarte con un representante, prueba escribiendo asistente"
+"funciona mal el wifi";"Necesitamos que desenchufes tu modem y en 10 segundos vuelvas a conectarlo. Luego en 10 minutos escribe a ver si mejoro. Si el problema persiste es necesario contactarte con un representante, prueba escribiendo asistente"
 "wifi";"¿Qué quieres saber? Prueba decir cambiar contraseña wifi o funciona mal el wifi"
 "asistente"; "Te contamos que en este momento nuestro tiempo de respuesta es mayor al habitual. Te agradecemos contactarte en otro momento."
 "Gracias Chau"; "Nos alegra ayudarte. Muchas gracias por usar el bot de UNGSNet"

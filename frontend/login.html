@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión</title>
+    <link rel="icon" href="./images/logo.png">
+    <link rel="stylesheet" href="./css/login.css">
+</head>
+<body>
+<div class="main">
+    <input type="checkbox" id="chk" aria-hidden="true">
+    <div class="signup">
+        <form id="registerForm" onsubmit="event.preventDefault(); registerUser(this.username.value, this.email.value, this.password.value);">
+            <label for="chk" aria-hidden="true">Registrarse</label>
+            <input type="text" name="username" placeholder="Usuario" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Contraseña" required>
+            <button type="submit">Registrarse</button>
+        </form>
+    </div>
+    <div class="login">
+        <form id="loginForm" onsubmit="event.preventDefault(); authenticateUser(this.email.value, this.password.value);">
+            <label for="chk" aria-hidden="true" class="login_h1">Iniciar Sesión</label>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Iniciar sesión</button>
+            <button onclick="registerFingerprint()">Usar huella</button>
+        </form>
+    </div>
+</div>
+
+<script src="./js/register.js"></script>
+</body>
+</html>

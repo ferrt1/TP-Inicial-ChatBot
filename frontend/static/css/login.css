@@ -114,11 +114,12 @@ label:hover {
 	transform: scale(.6);
 }
 
-.custom-alert {
+.custom-alert-red {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+	text-align: center;
     padding: 20px;
 	padding-bottom: 0px;
     background-color: #f44336;
@@ -128,11 +129,11 @@ label:hover {
     display: none; 
   }
   
-  .custom-alert-message {
+  .custom-alert-message-red {
     margin-bottom: 10px;
   }
   
-  .custom-alert-close {
+  .custom-alert-close-red {
 	display: block;
 	margin-top: 10px; 
 	background-color: transparent;
@@ -142,6 +143,39 @@ label:hover {
 	cursor: pointer;
   }
 
-  .custom-alert-close:hover {
+  .custom-alert-close-red:hover {
 	background-color: #ac433c;
+  }
+
+  .custom-alert-green {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+	text-align: center;
+    padding: 20px;
+	padding-bottom: 0px;
+    background-color: #2baa29;
+    color: white; 
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: none; 
+  }
+  
+  .custom-alert-message-green {
+    margin-bottom: 10px;
+  }
+  
+  .custom-alert-close-green {
+	display: block;
+	margin-top: 10px; 
+	background-color: transparent;
+	border: none;
+	color: white;
+	font-size: 20px;
+	cursor: pointer;
+  }
+
+  .custom-alert-close-green:hover {
+	background-color: #29843b;
   }

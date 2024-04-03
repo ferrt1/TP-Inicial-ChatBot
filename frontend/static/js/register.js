@@ -48,19 +48,31 @@ function base64urlToBuffer(base64url) {
     return outputArray.buffer;
 }
 
-function showAlert(message) {
-    var customAlert = document.getElementById('customAlert');
-    var customAlertMessage = document.getElementById('customAlertMessage');
+function showAlertRed(message) {
+    var customAlert = document.getElementById('customAlertRed');
+    var customAlertMessage = document.getElementById('customAlertMessageRed');
 
     customAlertMessage.innerText = message;
     customAlert.style.display = 'block';
 
-    var customAlertClose = document.getElementById('customAlertClose');
+    var customAlertClose = document.getElementById('customAlertCloseRed');
     customAlertClose.addEventListener('click', function () {
         customAlert.style.display = 'none';
     });
 }
 
+function showAlertGreen(message) {
+    var customAlert = document.getElementById('customAlertGreen');
+    var customAlertMessage = document.getElementById('customAlertMessageGreen');
+
+    customAlertMessage.innerText = message;
+    customAlert.style.display = 'block';
+
+    var customAlertClose = document.getElementById('customAlertCloseGreen');
+    customAlertClose.addEventListener('click', function () {
+        customAlert.style.display = 'none';
+    });
+}
 
 
 // Función para registrar un nuevo usuario
@@ -102,12 +114,10 @@ async function registerUser(email) {
             if (!verifyResponse.ok) {
                 throw new Error('Error al verificar el registro');
             }
-
-            showAlert('Registrado exitosamente! Prueba iniciando sesión');
+            showAlertGreen('Registro existoso! Prueba iniciando sesión');
             document.getElementById('registerForm').reset();
         } else {
-            
-            showAlert('El correo ya se encuentra registrado.');
+            showAlertRed('El correo ya se encuentra registrado.');
         }
     } catch (error) {
         console.error('Error de red:', error);
@@ -127,7 +137,7 @@ async function authenticateUser(email) {
         });
 
         if (!optionsResponse.ok) {
-            throw new Error('Error al obtener las opciones de autenticación');
+           showAlertRed('El correo no se encuentra registrado');
         }
 
         const options = await optionsResponse.json();

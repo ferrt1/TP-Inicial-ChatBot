@@ -4,15 +4,12 @@ from flask_sqlalchemy import SQLAlchemy
 from webauthn import generate_registration_options, options_to_json, verify_registration_response, generate_authentication_options, verify_authentication_response, base64url_to_bytes
 from webauthn.helpers.structs import (
     AttestationConveyancePreference,
-    UserVerificationRequirement,
-    AuthenticationCredential,
     AuthenticatorAttachment,
     AuthenticatorSelectionCriteria,
     PublicKeyCredentialDescriptor,
-    ResidentKeyRequirement,
-    RegistrationCredential,
     PublicKeyCredentialType,
-    AuthenticatorTransport
+    AuthenticatorTransport,
+    ResidentKeyRequirement
 )
 
 import secrets
@@ -65,6 +62,7 @@ def register():
     ukey_base64 = base64.urlsafe_b64encode(ukey_bytes)	
     if not isinstance(ukey_base64, str):
         ukey_base64 = ukey_base64.decode('utf-8')
+    
     ukey = ukey_base64
 
     new_user = User(email=email, user_id = ukey_bytes)
@@ -97,15 +95,13 @@ def verify_registration():
     inner_response = client_response.get('response')
     client_data_json = inner_response.get('clientDataJSON')
     attestation_object = inner_response.get('attestationObject')
-    expected_rp_id = client_response.get('rpId')
+    #expected_rp_id = client_response.get('rpId')
     expected_origin = client_response.get('origin')
-    
 
     client_data_json_b64 = client_response.get('response').get('clientDataJSON')
     client_data_json_str = base64.urlsafe_b64decode(client_data_json_b64 + '==').decode()
 
     client_data_json_obj = json.loads(client_data_json_str)
-
 
 
     expected_challenge = base64url_to_bytes(client_data_json_obj.get('challenge'))
@@ -124,7 +120,7 @@ def verify_registration():
     webauthn_response = verify_registration_response(
         credential=credential,
         expected_challenge=expected_challenge,
-        expected_rp_id='f90a-2800-810-469-744-b890-f13-99c5-163.ngrok-free.app',
+        expected_rp_id=RP_ID,
         expected_origin=expected_origin,
         require_user_verification=True
     )
@@ -150,6 +146,10 @@ def login():
     email = data.get('email')
 
     user = User.query.filter_by(email=email).first()
+
+    if not user:
+         return jsonify({'message': 'Credenciales inválidas'}), 401
+
     challenge = generate_challenge()
     print(user.email)
     print(user.credential_id)
@@ -163,7 +163,7 @@ def login():
                             AuthenticatorTransport.HYBRID],
             )]
             options = generate_authentication_options(
-                    rp_id='f90a-2800-810-469-744-b890-f13-99c5-163.ngrok-free.app',
+                    rp_id=RP_ID,
                     challenge=challenge,  
                     timeout=60000,
                     allow_credentials=allow_credentials,
@@ -213,7 +213,7 @@ def verify_authentication():
     webauthn_response = verify_authentication_response(
         credential=credential,
         expected_challenge=expected_challenge,
-        expected_rp_id='f90a-2800-810-469-744-b890-f13-99c5-163.ngrok-free.app',
+        expected_rp_id=RP_ID,
         expected_origin=expected_origin,
         credential_public_key=user.public_key,
         credential_current_sign_count=user.sign_count,

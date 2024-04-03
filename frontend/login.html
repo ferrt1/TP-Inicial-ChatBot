@@ -11,23 +11,24 @@
 <div class="main">
     <input type="checkbox" id="chk" aria-hidden="true">
     <div class="signup">
-        <form id="registerForm" onsubmit="event.preventDefault(); registerUser(this.username.value, this.email.value, this.password.value);">
+        <form id="registerForm" onsubmit="event.preventDefault(); registerUser(this.email.value);">
             <label for="chk" aria-hidden="true">Registrarse</label>
-            <input type="text" name="username" placeholder="Usuario" required>
-            <input type="email" name="email" placeholder="Email" required>
-            <input type="password" name="password" placeholder="Contraseña" required>
+            <input id="registerEmail" type="email" name="email" placeholder="Email" required>
             <button type="submit">Registrarse</button>
         </form>
     </div>
     <div class="login">
-        <form id="loginForm" onsubmit="event.preventDefault(); authenticateUser(this.email.value, this.password.value);">
+        <form id="loginForm" onsubmit="event.preventDefault(); authenticateUser(this.email.value);">
             <label for="chk" aria-hidden="true" class="login_h1">Iniciar Sesión</label>
             <input type="email" name="email" placeholder="Email" required>
-            <input type="password" name="password" placeholder="Password" required>
             <button type="submit">Iniciar sesión</button>
-            <button onclick="registerFingerprint()">Usar huella</button>
         </form>
     </div>
+    <div id="customAlert" class="custom-alert">
+        <span id="customAlertMessage" class="custom-alert-message"></span>
+        <button id="customAlertClose" class="custom-alert-close">&times;</button>
+      </div>
+      
 </div>
 
 <script src="./js/register.js"></script>

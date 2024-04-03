@@ -113,3 +113,35 @@ label:hover {
 #chk:checked ~ .signup label{
 	transform: scale(.6);
 }
+
+.custom-alert {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+	padding-bottom: 0px;
+    background-color: #f44336;
+    color: white; 
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: none; 
+  }
+  
+  .custom-alert-message {
+    margin-bottom: 10px;
+  }
+  
+  .custom-alert-close {
+	display: block;
+	margin-top: 10px; 
+	background-color: transparent;
+	border: none;
+	color: white;
+	font-size: 20px;
+	cursor: pointer;
+  }
+
+  .custom-alert-close:hover {
+	background-color: #ac433c;
+  }

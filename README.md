@@ -185,7 +185,22 @@ Este código define la aplicación web y las rutas para servir archivos estátic
 
 Este código define la interfaz de usuario del chatbot y la lógica para enviar las preguntas del usuario al servidor y mostrar las respuestas del bot.
 
+### Login Huella Digital
+Entrega 3 05/04
+Login Con huella digital : Para login con huella digital lo que se hace es utilizar un autenticador web que permite  que en lugar de la contraseña habitual, los usuarios podrán identificarse con datos biométricos, del tipo huella dactilar, hardware específico o aplicaciones específicas.
 
+Este proceso consta de dos instancias : Registro y Autenticación
 
+##### Registro
+el servidor debe proporcionar Opciones de creación de claves de acceso junto con un challenge único que se pasa a la API WebAuthn en el navegador. El usuario selecciona entre los autenticadores disponibles que cumplen con los requisitos de las opciones  de la organizacion, autoriza la acción y luego la respuesta se envía de vuelta a la organizacion para su validación y almacenamiento.
+
+![Screenshot_9](https://github.com/ferrt1/TP-Inicial-ChatBot/assets/83597336/6ed814b5-e236-47ca-94a8-586e2fbd431f)
+
+0. El cliente inicia una solicitud para registrar un autenticador en nombre del usuario.
+1. La organización crea una instancia de la credencial y la devuelve al cliente. La instancia contiene información sobre el usuario, el RP y el tipo de credencial deseada.
+2. El navegador del cliente valida el id de la organizacion con el origen, aplica hash a los datos del cliente
+3. Antes de continuar, el autenticador solicitará algún tipo de consentimiento del usuario. Después de verificar el consentimiento, el autenticador creará un nuevo par de claves asimétricas y almacenará de forma segura la clave privada.
+4. La nueva clave pública, una identificación de credencial y otros datos de certificación se devuelven al navegador.
+5. En una credencial llave publica  se devuelve al RP para finalizar el registro.
 
 

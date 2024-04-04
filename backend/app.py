@@ -17,7 +17,7 @@ import json
 import base64
 import os
 
-RP_ID='f90a-2800-810-469-744-b890-f13-99c5-163.ngrok-free.app'
+RP_ID='403c-2800-810-469-744-f901-171a-c87b-3b1a.ngrok-free.app'
 RP_NAME='UNGSNet'
 UKEY_DEFAULT_BYTE_LEN = 20
 
@@ -77,7 +77,7 @@ def register():
         attestation=AttestationConveyancePreference.DIRECT,
         authenticator_selection=AuthenticatorSelectionCriteria(
             authenticator_attachment=AuthenticatorAttachment.PLATFORM,
-            resident_key=ResidentKeyRequirement.DISCOURAGED,
+            resident_key=ResidentKeyRequirement.PREFERRED,
         ),
         challenge=challenge,
         timeout=120000,

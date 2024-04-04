@@ -185,9 +185,13 @@ Este código define la aplicación web y las rutas para servir archivos estátic
 
 Este código define la interfaz de usuario del chatbot y la lógica para enviar las preguntas del usuario al servidor y mostrar las respuestas del bot.
 
-### Login Huella Digital
-Entrega 3 05/04
-Login Con huella digital : Para login con huella digital lo que se hace es utilizar un autenticador web que permite  que en lugar de la contraseña habitual, los usuarios podrán identificarse con datos biométricos, del tipo huella dactilar, hardware específico o aplicaciones específicas.
+---
+
+### Entrega 3 05/04
+
+#### Login Huella Digital
+
+Login con huella digital : Para el login con huella digital lo que se hace es utilizar un autenticador web (WebAuthn) que permite  que en lugar de la contraseña habitual, los usuarios podrán identificarse con datos biométricos, del tipo huella dactilar, hardware específico o aplicaciones específicas.
 
 Este proceso consta de dos instancias : Registro y Autenticación
 
@@ -196,11 +200,11 @@ el servidor debe proporcionar Opciones de creación de claves de acceso junto co
 
 ![Screenshot_9](https://github.com/ferrt1/TP-Inicial-ChatBot/assets/83597336/6ed814b5-e236-47ca-94a8-586e2fbd431f)
 
-0. El cliente inicia una solicitud para registrar un autenticador en nombre del usuario.
-1. La organización crea una instancia de la credencial y la devuelve al cliente. La instancia contiene información sobre el usuario, el RP y el tipo de credencial deseada.
-2. El navegador del cliente valida el id de la organizacion con el origen, aplica hash a los datos del cliente
-3. Antes de continuar, el autenticador solicitará algún tipo de consentimiento del usuario. Después de verificar el consentimiento, el autenticador creará un nuevo par de claves asimétricas y almacenará de forma segura la clave privada.
-4. La nueva clave pública, una identificación de credencial y otros datos de certificación se devuelven al navegador.
-5. En una credencial llave publica  se devuelve al RP para finalizar el registro.
+0. **Inicio de la solicitud:** El cliente inicia una solicitud para registrar un autenticador con el nombre de usuario (en este caso, el correo electrónico). Esta solicitud se realiza a través de una llamada a la API WebAuthn en el navegador del cliente.
+1. **Creación de la instancia de la credencial:** La organización (UNGSNet) crea una instancia de la credencial y la devuelve al cliente. Esta instancia contiene información sobre el usuario, el RP (Relying Party, es decir, la organización) y el tipo de credencial deseada. Esta información se utiliza para crear una solicitud de registro que se envía a la API WebAuthn.
+2. **Validación del ID de la organización:** El navegador del cliente valida el ID de la organización con el origen y aplica un hash a los datos del cliente. Este paso es crucial para garantizar que la solicitud proviene de una fuente confiable.
+3. **Consentimiento del usuario y creación de las claves:** Antes de continuar, el autenticador solicitará algún tipo de consentimiento del usuario. Después de verificar el consentimiento, el autenticador creará un nuevo par de claves asimétricas y almacenará de forma segura la clave privada. Este paso se realiza dentro del dispositivo de autenticación y es transparente para el usuario y la organización.
+4. **Devolución de la clave pública y otros datos:** La nueva clave pública, una identificación de credencial y otros datos de certificación se devuelven al navegador. Estos datos se empaquetan en un objeto PublicKeyCredential y se envían de vuelta a la organización.
+5. **Finalización del registro:** La credencial de clave pública se devuelve al RP para finalizar el registro. La organización valida la firma y los datos de la credencial, y si todo es correcto, la credencial se almacena en el servidor para su uso en futuras autenticaciones.
 
 

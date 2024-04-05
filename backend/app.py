@@ -17,7 +17,7 @@ import json
 import base64
 import os
 
-RP_ID='f20e-2800-810-469-744-bcd6-1c5c-cc58-7cd9.ngrok-free.app'
+RP_ID='f435-2800-810-469-744-d479-daf8-393e-8f6.ngrok-free.app'
 RP_NAME='UNGSNet'
 UKEY_DEFAULT_BYTE_LEN = 20
 TICKET = 'CERRADO'

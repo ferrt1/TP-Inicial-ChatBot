@@ -33,7 +33,6 @@ function publicKeyCredentialToJSON(pubKeyCred) {
 
         return obj
     }
-
     return pubKeyCred;
 }
 

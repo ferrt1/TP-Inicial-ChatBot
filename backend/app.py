@@ -11,20 +11,34 @@ from webauthn.helpers.structs import (
     AuthenticatorTransport,
     ResidentKeyRequirement
 )
-
+from flask_socketio import SocketIO, send
 import secrets
 import json
 import base64
 import os
 
-RP_ID='403c-2800-810-469-744-f901-171a-c87b-3b1a.ngrok-free.app'
+RP_ID='f20e-2800-810-469-744-bcd6-1c5c-cc58-7cd9.ngrok-free.app'
 RP_NAME='UNGSNet'
 UKEY_DEFAULT_BYTE_LEN = 20
+TICKET = 'CERRADO'
 
 app = Flask(__name__)
+socketio = SocketIO(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:labochatbot@localhost:3306/labochatbot'
 app.config['SECRET_KEY'] = '123412az'
 db = SQLAlchemy(app)
+
+@socketio.on('connect')
+def handle_connect():
+    print('Cliente conectado')
+
+@socketio.on('disconnect')
+def handle_disconnect():
+    print('Cliente desconectado')
+
+@socketio.on('error')
+def handle_error(error):
+    print('Error: ', error)
 
 # Define la tabla 'users'
 class User(db.Model):
@@ -36,6 +50,11 @@ class User(db.Model):
     public_key = db.Column(db.LargeBinary, unique=True)
     sign_count = db.Column(db.Integer)
 
+@app.route("/user_id", methods=["GET"])
+def get_user_id():
+    user_id = session.get('user_id')
+    return jsonify(user_id=user_id)
+
 @app.route('/chatbot')
 def home():
     return send_from_directory('../frontend/', 'index.html')
@@ -43,6 +62,10 @@ def home():
 @app.route('/')
 def login_html():
     return send_from_directory('../frontend/', 'login.html')
+
+@app.route('/admin')
+def admin_html():
+    return send_from_directory('../frontend/', 'admin_panel.html')
 
 def generate_challenge():
     return os.urandom(32)
@@ -62,8 +85,6 @@ def register():
     ukey_base64 = base64.urlsafe_b64encode(ukey_bytes)	
     if not isinstance(ukey_base64, str):
         ukey_base64 = ukey_base64.decode('utf-8')
-    
-    ukey = ukey_base64
 
     new_user = User(email=email, user_id = ukey_bytes)
     db.session.add(new_user)
@@ -91,18 +112,13 @@ def register():
 @app.route('/verify_registration', methods=['POST'])
 def verify_registration():
     client_response = request.json.get('response')
-
     inner_response = client_response.get('response')
     client_data_json = inner_response.get('clientDataJSON')
     attestation_object = inner_response.get('attestationObject')
-    #expected_rp_id = client_response.get('rpId')
-    expected_origin = client_response.get('origin')
 
     client_data_json_b64 = client_response.get('response').get('clientDataJSON')
     client_data_json_str = base64.urlsafe_b64decode(client_data_json_b64 + '==').decode()
-
     client_data_json_obj = json.loads(client_data_json_str)
-
 
     expected_challenge = base64url_to_bytes(client_data_json_obj.get('challenge'))
     expected_origin = client_data_json_obj.get('origin')
@@ -147,12 +163,13 @@ def login():
 
     user = User.query.filter_by(email=email).first()
 
+    session['user_id'] = user.id
+    
     if not user:
          return jsonify({'message': 'Credenciales inválidas'}), 401
 
     challenge = generate_challenge()
-    print(user.email)
-    print(user.credential_id)
+
 
     if user:
             allow_credentials = [PublicKeyCredentialDescriptor(
@@ -176,7 +193,6 @@ def login():
 
 @app.route('/verify_authentication', methods=['POST'])
 def verify_authentication():
-   
     client_response = request.json.get('response')
     print(client_response)
   
@@ -204,11 +220,9 @@ def verify_authentication():
     user_name = session.get('user_name')
 
     user = User.query.filter_by(email=user_name).first()
-    print(user_name)
 
     if user is None:
         return jsonify({'status': 'failed', 'message': 'User not found'})
-
 
     webauthn_response = verify_authentication_response(
         credential=credential,
@@ -225,22 +239,68 @@ def verify_authentication():
 
     return jsonify({'status': 'ok'})
 
+# guardo los msjs
+admin_messages = {}
 
-@app.route('/generate-random-string', methods=['GET'])
-def generate_random_string():
-    random_string = secrets.token_urlsafe(32)  
-    return jsonify({'randomString': random_string}), 200
+@app.route("/bot", methods=["POST"])
+def bot_response():
+    user_message = request.form["user_message"]
+    user_id = int(session.get('user_id'))  
+    socketio.emit('user_message', {'user_id': user_id, 'message': user_message})
+
+    if user_message.lower() == 'tecnico':
+        admin_messages[user_id] = {"messages": [user_message], "status": "pending"}
+        return "Tu solicitud ha sido enviada a un técnico. Por favor, espera una respuesta."
+
+    if user_message.lower() == 'cerrar ticket':
+        admin_messages[user_id] = {"messages": [user_message], "status": "closed"}
+        return "Ticket cerrado con exito"
+
+    if user_id in admin_messages:
+        if admin_messages[user_id]["status"] in ["pending", "responded", "active"]:
+            return ""  # no devuelvo respuesta del bot si no esta en closed
+        elif admin_messages[user_id]["status"] == "closed":
+            del admin_messages[user_id]  
 
 
-@app.route('/get_id', methods=['GET'])
-def get_id():
-    data = request.args.get()
-    email = data.get('email')
-    user = User.query.filter_by(email=email).first()
-    if user:
-        return jsonify({'user_id': user.id}), 200
-    else:
-        return jsonify({'error': 'Usuario no encontrado'}), 404
+    bot_message = get_bot_response(user_message)
+    return bot_message
+
+
+
+@app.route("/admin/requests", methods=["GET"])
+def get_requests():
+    # lista de los usuarios con solicitud pendiente
+    return jsonify([user_id for user_id, request in admin_messages.items() if request["status"] == "pending"])
+
+@app.route("/admin/respond", methods=["POST"])
+def respond_to_request():
+    user_id = int(request.form["user_id"])
+    message = request.form["message"]
+
+    # mensaje del admin a la lista de mensajes
+    admin_messages[user_id]["messages"].append(message)
+
+    # cambio estado
+    if admin_messages[user_id]["status"] == "pending":
+        admin_messages[user_id]["status"] = "responded"
+
+    # envio el evento 
+    socketio.emit('admin_response', {'user_id': user_id, 'message': message, 'admin': True})
+
+    return "Mensaje enviado."
+
+
+@app.route("/admin/close", methods=["POST"])
+def close_ticket():
+    user_id = int(request.form["user_id"])  
+
+    if user_id not in admin_messages:
+        return "No hay ninguna solicitud de este usuario."
+
+    admin_messages[user_id]["status"] = "closed"
+    return "Ticket cerrado."
+
 
 @app.route('/css/<path:path>')
 def send_css(path):
@@ -253,12 +313,6 @@ def send_image(path):
 @app.route('/js/<path:path>')
 def send_javascript(path):
     return send_from_directory('../frontend/static/js', path)
-
-@app.route("/bot", methods=["POST"])
-def bot_response():
-    user_message = request.form["user_message"]
-    bot_message = get_bot_response(user_message)
-    return bot_message
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)

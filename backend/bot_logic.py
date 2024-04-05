@@ -26,3 +26,9 @@ def get_bot_response(user_message):
     bot_message = bot_message.replace('"', '')
 
     return bot_message
+
+def admin_bot_response():
+
+    admin_message= input('')
+
+    return admin_message

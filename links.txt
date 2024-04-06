@@ -1,8 +1,0 @@
-links
-
-fer:
-https://f435-2800-810-469-744-d479-daf8-393e-8f6.ngrok-free.app
-
-
-flavio:
-https://f4f0-2800-810-5e4-3483-88f7-b99d-d8cf-b599.ngrok-free.app

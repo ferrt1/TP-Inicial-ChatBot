@@ -1,4 +1,4 @@
-var socket = io.connect('https://f435-2800-810-469-744-d479-daf8-393e-8f6.ngrok-free.app');
+var socket = io.connect('https://34a6-2800-810-5e4-3483-5cfa-1de1-f721-7d35.ngrok-free.app');
 var my_user_id;
 
 

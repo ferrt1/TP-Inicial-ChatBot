@@ -17,14 +17,14 @@ import json
 import base64
 import os
 
-RP_ID='f435-2800-810-469-744-d479-daf8-393e-8f6.ngrok-free.app'
+RP_ID='34a6-2800-810-5e4-3483-5cfa-1de1-f721-7d35.ngrok-free.app' #Cambiar por su direccion (Tambien en admin y main)
 RP_NAME='UNGSNet'
 UKEY_DEFAULT_BYTE_LEN = 20
 TICKET = 'CERRADO'
 
 app = Flask(__name__)
 socketio = SocketIO(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:labochatbot@localhost:3306/labochatbot'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Poro1291a!@localhost:3306/labo_chatbot' #Cambiar por su base
 app.config['SECRET_KEY'] = '123412az'
 db = SQLAlchemy(app)
 

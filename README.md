@@ -207,4 +207,9 @@ el servidor debe proporcionar Opciones de creación de claves de acceso junto co
 4. **Devolución de la clave pública y otros datos:** La nueva clave pública, una identificación de credencial y otros datos de certificación se devuelven al navegador. Estos datos se empaquetan en un objeto PublicKeyCredential y se envían de vuelta a la organización.
 5. **Finalización del registro:** La credencial de clave pública se devuelve al RP para finalizar el registro. La organización valida la firma y los datos de la credencial, y si todo es correcto, la credencial se almacena en el servidor para su uso en futuras autenticaciones.
 
+#### WBS
+![WBS](https://github.com/ferrt1/TP-Inicial-ChatBot/assets/68827180/4625160e-1fa2-4902-b511-db1d444b6a33)
+
+
+
 

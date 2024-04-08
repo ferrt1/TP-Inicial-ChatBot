@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="es">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chatbot</title>
+    <link rel="icon" href="/images/logo.png">
+    <style>
+    .custom-alert-red {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        padding: 20px;
+        padding-bottom: 0px;
+        background-color: #f44336;
+        color: white;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .custom-alert-message-red {
+        margin-bottom: 10px;
+    }
+
+    .custom-alert-close-red {
+        margin: 10px auto;
+        display: block;
+        background-color: transparent;
+        border: none;
+        color: white;
+        font-size: 15px;
+        cursor: pointer;
+    }
+    </style>
+</head>
+<body>
+    <div class="custom-alert-red">
+        <div class="custom-alert-message-red">
+            Debes iniciar sesión para acceder a esta página
+        </div>
+        <button class="custom-alert-close-red" onclick="window.location.href='/'">
+            Cerrar
+        </button>
+    </div>
+</body>
+</html>

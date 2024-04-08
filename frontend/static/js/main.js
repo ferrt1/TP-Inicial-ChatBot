@@ -1,4 +1,4 @@
-var socket = io.connect('https://34a6-2800-810-5e4-3483-5cfa-1de1-f721-7d35.ngrok-free.app');
+var socket = io.connect('https://ferrt.pythonanywhere.com');
 var my_user_id;
 
 

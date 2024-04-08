@@ -1,4 +1,4 @@
-from flask import Flask, request, send_from_directory, jsonify, session
+from flask import Flask, request, send_from_directory, jsonify, session, make_response
 from bot_logic import get_bot_response
 from flask_sqlalchemy import SQLAlchemy
 from webauthn import generate_registration_options, options_to_json, verify_registration_response, generate_authentication_options, verify_authentication_response, base64url_to_bytes
@@ -11,20 +11,21 @@ from webauthn.helpers.structs import (
     AuthenticatorTransport,
     ResidentKeyRequirement
 )
-from flask_socketio import SocketIO, send
-import secrets
+from flask_socketio import SocketIO
 import json
 import base64
 import os
 
-RP_ID='34a6-2800-810-5e4-3483-5cfa-1de1-f721-7d35.ngrok-free.app' #Cambiar por su direccion (Tambien en admin y main)
+RP_ID='ferrt.pythonanywhere.com' #Cambiar por su direccion (Tambien en admin y main)
 RP_NAME='UNGSNet'
 UKEY_DEFAULT_BYTE_LEN = 20
 TICKET = 'CERRADO'
+# Mensajes del "administrador" para enviar
+admin_messages = {}
 
 app = Flask(__name__)
 socketio = SocketIO(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Poro1291a!@localhost:3306/labo_chatbot' #Cambiar por su base
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://ferrt:labochatbot@ferrt.mysql.pythonanywhere-services.com:3306/ferrt$default' #Cambiar por su base
 app.config['SECRET_KEY'] = '123412az'
 db = SQLAlchemy(app)
 
@@ -57,6 +58,9 @@ def get_user_id():
 
 @app.route('/chatbot')
 def home():
+    user_id = request.cookies.get('user_id')
+    if not user_id:
+        return send_from_directory('../frontend/', 'error.html')
     return send_from_directory('../frontend/', 'index.html')
 
 @app.route('/')
@@ -70,7 +74,6 @@ def admin_html():
 def generate_challenge():
     return os.urandom(32)
 
-# Ruta para registrar un nuevo usuario
 @app.route('/register', methods=['POST'])
 def register():
     email = request.json.get('email')
@@ -82,13 +85,15 @@ def register():
     challenge = generate_challenge()
 
     ukey_bytes = os.urandom(UKEY_DEFAULT_BYTE_LEN)
-    ukey_base64 = base64.urlsafe_b64encode(ukey_bytes)	
+    ukey_base64 = base64.urlsafe_b64encode(ukey_bytes)
     if not isinstance(ukey_base64, str):
         ukey_base64 = ukey_base64.decode('utf-8')
 
-    new_user = User(email=email, user_id = ukey_bytes)
-    db.session.add(new_user)
-    db.session.commit()
+    # No creamos el usuario aquí, solo guardamos la información necesaria en la sesión
+    session['registration'] = {
+        'email': email,
+        'user_id': ukey_bytes,
+    }
 
     make_credential_options = generate_registration_options(
         rp_id=RP_ID,
@@ -103,7 +108,7 @@ def register():
         challenge=challenge,
         timeout=120000,
     )
-    
+
     session['user_name'] = email
 
     return options_to_json(options=make_credential_options), 200
@@ -111,6 +116,18 @@ def register():
 
 @app.route('/verify_registration', methods=['POST'])
 def verify_registration():
+    # Aquí es donde creamos el usuario, después de que la autenticación ha sido verificada con éxito
+    registration = session.get('registration')
+    if registration is None:
+        return jsonify({'status': 'failed', 'message': 'No registration in progress'}), 400
+
+    email = registration['email']
+    user_id = registration['user_id']
+
+    new_user = User(email=email, user_id=user_id)
+    db.session.add(new_user)
+    db.session.commit()
+
     client_response = request.json.get('response')
     inner_response = client_response.get('response')
     client_data_json = inner_response.get('clientDataJSON')
@@ -132,7 +149,7 @@ def verify_registration():
         },
         'type': "public-key"
     }
-    
+
     webauthn_response = verify_registration_response(
         credential=credential,
         expected_challenge=expected_challenge,
@@ -164,7 +181,7 @@ def login():
     user = User.query.filter_by(email=email).first()
 
     session['user_id'] = user.id
-    
+
     if not user:
          return jsonify({'message': 'Credenciales inválidas'}), 401
 
@@ -175,17 +192,19 @@ def login():
             allow_credentials = [PublicKeyCredentialDescriptor(
                 id=user.credential_id,
                 type=PublicKeyCredentialType.PUBLIC_KEY,
-                transports=[AuthenticatorTransport.USB, AuthenticatorTransport.NFC, 
+                transports=[AuthenticatorTransport.USB, AuthenticatorTransport.NFC,
                             AuthenticatorTransport.BLE, AuthenticatorTransport.INTERNAL,
                             AuthenticatorTransport.HYBRID],
             )]
             options = generate_authentication_options(
                     rp_id=RP_ID,
-                    challenge=challenge,  
+                    challenge=challenge,
                     timeout=60000,
                     allow_credentials=allow_credentials,
                 )
-            return options_to_json(options=options), 200
+            resp = make_response(options_to_json(options=options))
+            resp.set_cookie('user_id', str(user.id))
+            return resp, 200
     else:
         return jsonify({'message': 'Credenciales inválidas'}), 401
 
@@ -195,7 +214,7 @@ def login():
 def verify_authentication():
     client_response = request.json.get('response')
     print(client_response)
-  
+
     client_data_json_b64 = client_response.get('response').get('clientDataJSON')
     client_data_json_str = base64.urlsafe_b64decode(client_data_json_b64 + '==').decode()
 
@@ -204,7 +223,7 @@ def verify_authentication():
     expected_challenge = base64url_to_bytes(client_data_json_obj.get('challenge'))
     expected_origin = client_data_json_obj.get('origin')
 
-  
+
     credential = {
         'id': client_response.get('id'),
         'rawId': client_response.get('rawId'),
@@ -239,35 +258,32 @@ def verify_authentication():
 
     return jsonify({'status': 'ok'})
 
-# guardo los msjs
-admin_messages = {}
-
 @app.route("/bot", methods=["POST"])
 def bot_response():
     user_message = request.form["user_message"]
-    user_id = int(session.get('user_id'))  
-    socketio.emit('user_message', {'user_id': user_id, 'message': user_message})
+    user_id = int(session.get('user_id'))
+    """socketio.emit('user_message', {'user_id': user_id, 'message': user_message})
 
     if user_message.lower() == 'tecnico':
         admin_messages[user_id] = {"messages": [user_message], "status": "pending"}
         return "Tu solicitud ha sido enviada a un técnico. Por favor, espera una respuesta."
 
     if user_message.lower() == 'cerrar ticket':
-        admin_messages[user_id] = {"messages": [user_message], "status": "closed"}
-        return "Ticket cerrado con exito"
+       admin_messages[user_id] = {"messages": [user_message], "status": "closed"}
+       return "Ticket cerrado con exito"
 
     if user_id in admin_messages:
         if admin_messages[user_id]["status"] in ["pending", "responded", "active"]:
             return ""  # no devuelvo respuesta del bot si no esta en closed
         elif admin_messages[user_id]["status"] == "closed":
-            del admin_messages[user_id]  
+            del admin_messages[user_id]"""
 
 
     bot_message = get_bot_response(user_message)
     return bot_message
 
 
-
+"""
 @app.route("/admin/requests", methods=["GET"])
 def get_requests():
     # lista de los usuarios con solicitud pendiente
@@ -285,7 +301,7 @@ def respond_to_request():
     if admin_messages[user_id]["status"] == "pending":
         admin_messages[user_id]["status"] = "responded"
 
-    # envio el evento 
+    # envio el evento
     socketio.emit('admin_response', {'user_id': user_id, 'message': message, 'admin': True})
 
     return "Mensaje enviado."
@@ -293,14 +309,14 @@ def respond_to_request():
 
 @app.route("/admin/close", methods=["POST"])
 def close_ticket():
-    user_id = int(request.form["user_id"])  
+    user_id = int(request.form["user_id"])
 
     if user_id not in admin_messages:
         return "No hay ninguna solicitud de este usuario."
 
     admin_messages[user_id]["status"] = "closed"
     return "Ticket cerrado."
-
+"""
 
 @app.route('/css/<path:path>')
 def send_css(path):
@@ -314,5 +330,4 @@ def send_image(path):
 def send_javascript(path):
     return send_from_directory('../frontend/static/js', path)
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+

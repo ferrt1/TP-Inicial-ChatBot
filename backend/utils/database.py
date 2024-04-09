@@ -10,3 +10,6 @@ class User(db.Model):
     credential_id = db.Column(db.LargeBinary, unique=True)
     public_key = db.Column(db.LargeBinary, unique=True)
     sign_count = db.Column(db.Integer)
+    first_name = db.Column(db.Integer)
+    last_name = db.Column(db.Integer)
+    first_visit_complete = db.Column(db.Boolean, default=False)

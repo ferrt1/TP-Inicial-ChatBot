@@ -3,13 +3,13 @@ $("#chat-form").on("submit", function (e) {
   var userMessage = $("#user-message").val();
   $.post("/bot", { user_message: userMessage }, function (botMessage) {
     $("#chatbox").append(
-      "<div class='outgoing'><div class='bubble'><strong>Tú: </strong>" +
+      "<div class='outgoing'><div class='bubble'>" +
       userMessage +
       "</div></div>"
     );
     if (botMessage.trim() !== "") {
       $("#chatbox").append(
-        "<div class='incoming'><div class='bubble'><strong>Bot: </strong>" +
+        "<div class='incoming'><div class='bubble'>" +
           botMessage +
           "</div></div>"
       );

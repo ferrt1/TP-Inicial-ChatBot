@@ -44,6 +44,38 @@ def handle_last_name_request(user, user_message):
     db.session.commit()
     return 'Muchas Gracias, ¿En qué te puedo ayudar? Prueba escribiendo opciones'
 
-def handle_first_visit(user):
+def handle_first_visit():
     session['asking_for_name'] = True
     return 'Veo que es tu primera vez por aquí, puedes decirme tu nombre'
+
+def handle_plan_request(user, user_message):
+    valid_plans = ['plan base', 'base', 'plan premium', 'premium', 'plan exclusive', 'exclusive']
+
+    if user_message.lower() not in valid_plans:
+        return 'No entendí, prueba escribiendo una de estas opciones: plan base, base, plan premium, premium, plan exclusive, exclusive'
+     
+    if user_message.lower() in ['plan base', 'base']:
+        user.plan = 'base'
+    elif user_message.lower() in ['plan premium', 'premium']:
+        user.plan = 'premium'
+    elif user_message.lower() in ['plan exclusive', 'exclusive']:
+        user.plan = 'exclusive'
+
+    db.session.commit()
+    session['asking_for_plan'] = False
+    return 'Gracias, tu plan ha sido registrado. Ahora sí puedes ver opciones 😃'
+
+
+def handle_plan(user):
+    if user.plan == None:
+        session['asking_for_plan'] = True
+        return 'Hola, veo que aún no agregaste tu plan. Por favor, elige cuál posees: <br> Plan base: 25MB por $10000 al mes <br> Plan premium: 50MB por $15000 al mes <br> Plan exclusive: 100MB por $20000 al mes'
+    
+    if user.plan == 'base':
+        factura = 10000
+    elif user.plan == 'premium':
+        factura = 15000
+    elif user.plan == 'exclusive':
+        factura = 20000
+
+    return f'Hola {user.first_name}. Tu factura es de: <strong> ${factura} 😃 </strong>. Nos alegra ayudarte!'

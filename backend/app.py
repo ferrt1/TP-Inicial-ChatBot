@@ -1,5 +1,5 @@
 from flask import Flask, request, send_from_directory, jsonify, session
-from bot.bot_logic import get_bot_response, handle_name_request, handle_last_name_request, handle_first_visit
+from bot.bot_logic import get_bot_response, handle_name_request, handle_last_name_request, handle_first_visit, handle_plan, handle_plan_request
 from auth.register import register_user, verify_registration
 from auth.authentication import login_user, verify_authentication
 from utils.database import db, User
@@ -64,14 +64,20 @@ def bot_response():
     user_name = session.get('user_name')
     user = User.query.filter_by(email=user_name).first()
 
+    if user_message.lower() == 'factura':
+        return handle_plan(user)
+
     if session.get('asking_for_name', False):
         return handle_name_request(user, user_message)
+    
+    elif session.get('asking_for_plan', False):
+        return handle_plan_request(user, user_message)
 
     elif session.get('asking_for_last_name', False):
         return handle_last_name_request(user, user_message)
 
     elif not user.first_visit_complete:  
-        return handle_first_visit(user)
+        return handle_first_visit()
 
     else:
         bot_message = get_bot_response(user_message)

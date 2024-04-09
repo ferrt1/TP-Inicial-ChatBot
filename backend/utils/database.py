@@ -13,3 +13,4 @@ class User(db.Model):
     first_name = db.Column(db.Integer)
     last_name = db.Column(db.Integer)
     first_visit_complete = db.Column(db.Boolean, default=False)
+    plan = db.Column(db.String(45))

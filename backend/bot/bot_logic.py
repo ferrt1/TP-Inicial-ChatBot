@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 
 # lee los datos de entrenamiento desde un archivo .csv
-data = pd.read_csv('data.csv', delimiter=';')
+data = pd.read_csv('./bot/data.csv', delimiter=';')
 
 # prepara los datos
 questions, answers = data['questions'], data['answers']
@@ -27,8 +27,4 @@ def get_bot_response(user_message):
 
     return bot_message
 
-def admin_bot_response():
 
-    admin_message= input('')
-
-    return admin_message

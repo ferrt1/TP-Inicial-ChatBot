@@ -27,8 +27,5 @@ def get_bot_response(user_message):
 
     return bot_message
 
-def admin_bot_response():
-
-    admin_message= input('')
-
-    return admin_message
+def get_facture():
+    return ''

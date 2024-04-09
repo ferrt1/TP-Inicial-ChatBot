@@ -1,6 +1,5 @@
 from flask import Flask, request, send_from_directory, jsonify, session, make_response
 from bot_logic import get_bot_response
-from flask_sqlalchemy import SQLAlchemy
 from webauthn import generate_registration_options, options_to_json, verify_registration_response, generate_authentication_options, verify_authentication_response, base64url_to_bytes
 from webauthn.helpers.structs import (
     AttestationConveyancePreference,
@@ -11,7 +10,7 @@ from webauthn.helpers.structs import (
     AuthenticatorTransport,
     ResidentKeyRequirement
 )
-from flask_socketio import SocketIO
+from database import db, User
 import json
 import base64
 import os
@@ -24,32 +23,10 @@ TICKET = 'CERRADO'
 admin_messages = {}
 
 app = Flask(__name__)
-socketio = SocketIO(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://ferrt:labochatbot@ferrt.mysql.pythonanywhere-services.com:3306/ferrt$default' #Cambiar por su base
+#socketio = SocketIO(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://ferrt:labochatbot@ferrt.mysql.pythonanywhere-services.com:3306/ferrt$default'
 app.config['SECRET_KEY'] = '123412az'
-db = SQLAlchemy(app)
 
-@socketio.on('connect')
-def handle_connect():
-    print('Cliente conectado')
-
-@socketio.on('disconnect')
-def handle_disconnect():
-    print('Cliente desconectado')
-
-@socketio.on('error')
-def handle_error(error):
-    print('Error: ', error)
-
-# Define la tabla 'users'
-class User(db.Model):
-    __tablename__ = 'users'
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    email =  db.Column(db.String(45), unique=True, nullable=False)
-    user_id = db.Column(db.LargeBinary, unique=True, nullable=False)
-    credential_id = db.Column(db.LargeBinary, unique=True)
-    public_key = db.Column(db.LargeBinary, unique=True)
-    sign_count = db.Column(db.Integer)
 
 @app.route("/user_id", methods=["GET"])
 def get_user_id():
@@ -66,7 +43,7 @@ def home():
 @app.route('/')
 def login_html():
     return send_from_directory('../frontend/', 'login.html')
-
+            
 @app.route('/admin')
 def admin_html():
     return send_from_directory('../frontend/', 'admin_panel.html')
@@ -261,7 +238,6 @@ def verify_authentication():
 @app.route("/bot", methods=["POST"])
 def bot_response():
     user_message = request.form["user_message"]
-    user_id = int(session.get('user_id'))
     """socketio.emit('user_message', {'user_id': user_id, 'message': user_message})
 
     if user_message.lower() == 'tecnico':
@@ -278,9 +254,35 @@ def bot_response():
         elif admin_messages[user_id]["status"] == "closed":
             del admin_messages[user_id]"""
 
-
     bot_message = get_bot_response(user_message)
     return bot_message
+
+
+
+@app.route('/css/<path:path>')
+def send_css(path):
+    return send_from_directory('../frontend/static/css', path)
+
+@app.route('/images/<path:path>')
+def send_image(path):
+    return send_from_directory('../frontend/static/images', path)
+
+@app.route('/js/<path:path>')
+def send_javascript(path):
+    return send_from_directory('../frontend/static/js', path)
+
+
+# @socketio.on('connect')
+# def handle_connect():
+#     print('Cliente conectado')
+
+# @socketio.on('disconnect')
+# def handle_disconnect():
+#     print('Cliente desconectado')
+
+# @socketio.on('error')
+# def handle_error(error):
+#     print('Error: ', error)
 
 
 """
@@ -317,17 +319,3 @@ def close_ticket():
     admin_messages[user_id]["status"] = "closed"
     return "Ticket cerrado."
 """
-
-@app.route('/css/<path:path>')
-def send_css(path):
-    return send_from_directory('../frontend/static/css', path)
-
-@app.route('/images/<path:path>')
-def send_image(path):
-    return send_from_directory('../frontend/static/images', path)
-
-@app.route('/js/<path:path>')
-def send_javascript(path):
-    return send_from_directory('../frontend/static/js', path)
-
-

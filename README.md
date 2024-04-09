@@ -208,7 +208,9 @@ el servidor debe proporcionar Opciones de creación de claves de acceso junto co
 5. **Finalización del registro:** La credencial de clave pública se devuelve al RP para finalizar el registro. La organización valida la firma y los datos de la credencial, y si todo es correcto, la credencial se almacena en el servidor para su uso en futuras autenticaciones.
 
 #### WBS
-![WBS](https://github.com/ferrt1/TP-Inicial-ChatBot/assets/68827180/4625160e-1fa2-4902-b511-db1d444b6a33)
+
+![image](https://github.com/ferrt1/TP-Inicial-ChatBot/assets/74360213/d4c68446-e32d-4d19-9f50-1cd64f9773aa)
+
 
 
 
